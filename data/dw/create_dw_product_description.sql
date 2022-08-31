@@ -1,4 +1,4 @@
-create table dw_product_description
+create table dw.dw_product_description
 (
     rowguid                text primary key,
     product_description_id int,

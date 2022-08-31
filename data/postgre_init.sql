@@ -1,7 +1,7 @@
-create database if not exists ods;
+create schema if not exists ods;
 
-create database if not exists dw;
+create schema if not exists dw;
 
-create database if not exists dm;
+create schema if not exists dm;
 
 

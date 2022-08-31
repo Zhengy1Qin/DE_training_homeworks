@@ -1,4 +1,4 @@
-create table dw_customer
+create table dw.dw_customer
 (
     rowguid       text primary key,
     customer_id   int,

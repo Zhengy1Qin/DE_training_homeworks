@@ -1,4 +1,4 @@
-create table dw_sales_order
+create table dw.dw_sales_order
 (
     sales_order_key           int primary key,
     sales_order_id            int,

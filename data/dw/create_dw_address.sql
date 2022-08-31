@@ -1,4 +1,4 @@
-create table dw_address
+create table dw.dw_address
 (
     rowguid        text primary key,
     address_id     int,
