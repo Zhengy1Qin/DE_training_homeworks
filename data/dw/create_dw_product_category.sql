@@ -1,8 +1,8 @@
 create table dw_product_category
 (
     product_category_id        int primary key,
-    rowguid                    nvarchar(60),
+    rowguid                    text,
     parent_product_category_id int,
-    name                       nvarchar(50),
-    modified_date              datetime
+    name                       text,
+    modified_date              date
 );

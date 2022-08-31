@@ -1,6 +1,6 @@
-create table dw_product_model_product_description
+create table dw_sales_order_line_item
 (
-    rowguid               nvarchar(60) primary key,
+    rowguid               text primary key,
     sales_order_id        int,
     sales_order_detail_id int,
     order_qty             smallint,
@@ -8,8 +8,8 @@ create table dw_product_model_product_description
     unit_price            money,
     unit_price_discount   money,
     line_total            numeric(38, 6),
-    modified_date         datetime,
-    start_date            datetime,
-    end_date              datetime,
-    is_valid_flag         nvarchar(15)
+    modified_date         date,
+    start_date            date,
+    end_date              date,
+    is_valid_flag         text
 );

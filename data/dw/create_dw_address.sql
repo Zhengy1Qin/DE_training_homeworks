@@ -1,16 +1,15 @@
 create table dw_address
 (
-    rowguid        nvarchar(60) primary key,
+    rowguid        text primary key,
     address_id     int,
-    address_line1  nvarchar(60),
-    address_line2  nvarchar(60),
-    city           nvarchar(30),
-    state_province nvarchar(50),
-    country_region nvarchar(50),
-    postal_code    nvarchar(15),
-    rowguid        nvarchar(60),
-    modified_date  datetime,
-    start_date     datetime,
-    end_date       datetime,
-    is_valid_flag  nvarchar(15)
+    address_line1  text,
+    address_line2  text,
+    city           text,
+    state_province text,
+    country_region text,
+    postal_code    text,
+    modified_date  date,
+    start_date     date,
+    end_date       date,
+    is_valid_flag  text
 );

@@ -1,10 +1,10 @@
 create table dw_product_description
 (
-    rowguid                nvarchar(60) primary key,
+    rowguid                text primary key,
     product_description_id int,
-    description            nvarchar(400),
-    modified_date          datetime,
-    start_date             datetime,
-    end_date               datetime,
-    is_valid_flag          nvarchar(15)
+    description            text,
+    modified_date          date,
+    start_date             date,
+    end_date               date,
+    is_valid_flag          text
 );

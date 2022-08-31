@@ -1,11 +1,11 @@
 create table dw_customer_address
 (
-    rowguid       nvarchar(60) primary key,
+    rowguid       text primary key,
     customer_id   int,
     address_id    int,
-    address_type  nvarchar(50),
-    modified_date datetime,
-    start_date    datetime,
-    end_date      datetime,
-    is_valid_flag nvarchar(15)
+    address_type  text,
+    modified_date date,
+    start_date    date,
+    end_date      date,
+    is_valid_flag text
 );
