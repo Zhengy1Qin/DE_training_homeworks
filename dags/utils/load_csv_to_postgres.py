@@ -1,5 +1,6 @@
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
+
 def normalize_csv(ts, **kwargs):
     import csv
     source_filename = kwargs['source']
@@ -17,9 +18,11 @@ def normalize_csv(ts, **kwargs):
                 writer.writerow(row)
     return target_filename
 
-def load_csv_to_postgres(table_name, **kwargs):
-    csv_filepath = kwargs['csv_filepath']
+
+def load_csv_to_postgres(ts, table_name, **kwargs):
+    normalize_csv(ts, **kwargs)
+    csv_filepath = kwargs['target']
     connection_id = kwargs['connection_id']
-    connecion = PostgresHook(postgres_conn_id=connection_id)
-    connecion.bulk_load(table_name, csv_filepath)
+    connection = PostgresHook(postgres_conn_id=connection_id)
+    connection.bulk_load(table_name, csv_filepath)
     return table_name
