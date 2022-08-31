@@ -1,0 +1,28 @@
+create table dw_sales_order
+(
+    sales_order_key           int primary key,
+    sales_order_id            int,
+    revision_number           tinyint,
+    order_date                datetime,
+    due_date                  datetime,
+    ship_date                 datetime,
+    status                    tinyint,
+    online_order_flag         bit,
+    sales_order_number        nvarchar(30),
+    purchase_order_number     nvarchar(25),
+    account_number            nvarchar(15),
+    customer_id               int,
+    ship_to_address_id        int,
+    bill_to_address_id        int,
+    ship_method               nvarchar(50),
+    credit_card_approval_code varchar(15),
+    sub_total                 money,
+    tax_amt                   money,
+    freight                   money,
+    total_due                 money,
+    comment                   nvarchar( max),
+    modified_date             datetime,
+    start_date                datetime,
+    end_date                  datetime,
+    is_valid_flag             nvarchar(15)
+);
