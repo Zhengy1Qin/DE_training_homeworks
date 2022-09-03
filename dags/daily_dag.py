@@ -197,6 +197,11 @@ with DAG(
         bash_command='echo add detail',
     )
 
+    dm_finished = BashOperator(
+        task_id='dm_finished',
+        bash_command='echo All data have been transformed from dw to dm',
+    )
+
     dag_start >> [load_sales_order_to_ods, load_product_to_ods, load_address_to_ods, load_customer_address_to_ods,
                   load_customer_to_ods, load_product_category_to_ods, load_product_model_to_ods,
                   load_product_model_product_description_to_ods, load_product_description_to_ods] >> ods_finished >> [
@@ -204,4 +209,4 @@ with DAG(
         dw_product_model_product_description,
         dw_product_category, dw_product_model, dw_product,
         dw_sales_order_line_item, dw_sales_order, dw_address,
-        dw_customer, dw_customer_address] >> dw_finished >> [dm_city_sales, dm_product_sales]
+        dw_customer, dw_customer_address] >> dw_finished >> [dm_city_sales, dm_product_sales] >> dm_finished
