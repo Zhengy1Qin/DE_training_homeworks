@@ -4,5 +4,6 @@ create table dw.dw_product_model
     rowguid             text,
     name                text,
     catalog_description text,
-    modified_date       date
+    modified_date       date,
+    dw_insert_date      date
 );
