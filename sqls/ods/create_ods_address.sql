@@ -9,5 +9,5 @@ create table ods.ods_address
     country_region text,
     postal_code    text,
     modified_date  date,
-    record_date    date default CURRENT_DATE
+    insert_date    date default CURRENT_DATE
 );

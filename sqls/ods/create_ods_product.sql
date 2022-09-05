@@ -17,5 +17,5 @@ create table ods.ods_product
     thumb_nail_photo          text,
     thumbnail_photo_file_name text,
     modified_date             date,
-    record_date               date default CURRENT_DATE
+    insert_date               date default CURRENT_DATE
 );

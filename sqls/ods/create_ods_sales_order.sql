@@ -1,6 +1,6 @@
 create table ods.ods_sales_order
 (
-    rowguid                   text primary key,
+    rowguid                   text,
     sales_order_id            int,
     sales_order_detail_id     int,
     revision_number           smallint,
@@ -28,5 +28,5 @@ create table ods.ods_sales_order
     unit_price_discount       money,
     line_total                numeric(38, 6),
     modified_date             date,
-    record_date               date default CURRENT_DATE
+    insert_date               date default CURRENT_DATE
 );

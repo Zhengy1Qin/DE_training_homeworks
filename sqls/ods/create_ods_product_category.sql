@@ -5,5 +5,5 @@ create table ods.ods_product_category
     parent_product_category_id int,
     name                       text,
     modified_date              date,
-    record_date                date default CURRENT_DATE
+    insert_date                date default CURRENT_DATE
 );

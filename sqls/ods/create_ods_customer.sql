@@ -15,5 +15,5 @@ create table ods.ods_customer
     password_hash text,
     password_salt text,
     modified_date date,
-    record_date   date default CURRENT_DATE
+    insert_date   date default CURRENT_DATE
 );

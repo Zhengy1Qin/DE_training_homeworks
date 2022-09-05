@@ -5,5 +5,5 @@ create table ods.ods_customer_address
     address_id    int,
     address_type  text,
     modified_date date,
-    record_date   date default CURRENT_DATE
+    insert_date   date default CURRENT_DATE
 );

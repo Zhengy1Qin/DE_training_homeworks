@@ -5,5 +5,5 @@ create table ods.ods_product_model
     name                text,
     catalog_description text,
     modified_date       date,
-    record_date         date default CURRENT_DATE
+    insert_date         date default CURRENT_DATE
 );
