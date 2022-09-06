@@ -1,3 +1,4 @@
+drop table dw.dw_customer_address;
 create table dw.dw_customer_address
 (
     rowguid       text primary key,

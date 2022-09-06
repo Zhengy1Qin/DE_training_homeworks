@@ -31,9 +31,9 @@ with DAG(
         task_id='load_sales_order_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/sales_order.csv",
+            'source': "/data/landing/{{ ds }}/SalesOrder.csv",
             'target': "/data/raw/{{ ds }}/sales_order.csv",
-            'table_name': 'sales_order_ods',
+            'table_name': 'ods.ods_sales_order',
             'connection_id': connection_id,
         },
     )
@@ -42,9 +42,9 @@ with DAG(
         task_id='load_product_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/product.csv",
+            'source': "/data/landing/{{ ds }}/Product.csv",
             'target': "/data/raw/{{ ds }}/product.csv",
-            'table_name': 'product_ods',
+            'table_name': 'ods.ods_product',
             'connection_id': connection_id,
         },
     )
@@ -53,9 +53,9 @@ with DAG(
         task_id='load_address_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/address.csv",
+            'source': "/data/landing/{{ ds }}/Address.csv",
             'target': "/data/raw/{{ ds }}/address.csv",
-            'table_name': 'address_ods',
+            'table_name': 'ods.ods_address',
             'connection_id': connection_id,
         },
     )
@@ -64,9 +64,9 @@ with DAG(
         task_id='load_customer_address_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/customer_address.csv",
+            'source': "/data/landing/{{ ds }}/CustomerAddress.csv",
             'target': "/data/raw/{{ ds }}/customer_address.csv",
-            'table_name': 'customer_address_ods',
+            'table_name': 'ods.ods_customer_address',
             'connection_id': connection_id,
         },
     )
@@ -75,9 +75,9 @@ with DAG(
         task_id='load_customer_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/customer.csv",
+            'source': "/data/landing/{{ ds }}/Customer.csv",
             'target': "/data/raw/{{ ds }}/customer.csv",
-            'table_name': 'customer_ods',
+            'table_name': 'ods.ods_customer',
             'connection_id': connection_id,
         },
     )
@@ -86,9 +86,9 @@ with DAG(
         task_id='load_product_category_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/product_category.csv",
+            'source': "/data/landing/{{ ds }}/ProductCategory.csv",
             'target': "/data/raw/{{ ds }}/product_category.csv",
-            'table_name': 'product_category_ods',
+            'table_name': 'ods.ods_product_category',
             'connection_id': connection_id,
         },
     )
@@ -97,9 +97,9 @@ with DAG(
         task_id='load_product_model_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/product_model.csv",
+            'source': "/data/landing/{{ ds }}/ProductModel.csv",
             'target': "/data/raw/{{ ds }}/product_model.csv",
-            'table_name': 'product_model_ods',
+            'table_name': 'ods.ods_product_model',
             'connection_id': connection_id,
         },
     )
@@ -108,9 +108,9 @@ with DAG(
         task_id='load_product_model_product_description_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/product_model_product_description.csv",
+            'source': "/data/landing/{{ ds }}/ProductModelProductDescription.csv",
             'target': "/data/raw/{{ ds }}/product_model_product_description.csv",
-            'table_name': 'product_model_product_description_ods',
+            'table_name': 'ods.ods_product_model_product_description',
             'connection_id': connection_id,
         },
     )
@@ -119,9 +119,9 @@ with DAG(
         task_id='load_product_description_to_ods',
         python_callable=load_csv_to_postgres,
         op_kwargs={
-            'source': "/data/landing/{{ ds }}/product_description.csv",
+            'source': "/data/landing/{{ ds }}/ProductDescription.csv",
             'target': "/data/raw/{{ ds }}/product_description.csv",
-            'table_name': 'product_description_ods',
+            'table_name': 'ods.ods_product_description',
             'connection_id': connection_id,
         },
     )

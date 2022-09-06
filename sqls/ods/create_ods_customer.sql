@@ -1,6 +1,6 @@
+drop table ods.ods_customer;
 create table ods.ods_customer
 (
-    rowguid       text primary key,
     customer_id   int,
     name_style    bit,
     title         text,
@@ -14,6 +14,7 @@ create table ods.ods_customer
     phone         text,
     password_hash text,
     password_salt text,
+    rowguid       text primary key,
     modified_date date,
-    insert_date   date default CURRENT_DATE
+    ods_insert_date   date default CURRENT_DATE
 );

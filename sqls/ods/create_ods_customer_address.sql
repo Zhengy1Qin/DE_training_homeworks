@@ -1,9 +1,10 @@
+drop table ods.ods_customer_address;
 create table ods.ods_customer_address
 (
-    rowguid       text primary key,
     customer_id   int,
     address_id    int,
     address_type  text,
+    rowguid       text primary key,
     modified_date date,
-    insert_date   date default CURRENT_DATE
+    ods_insert_date   date default CURRENT_DATE
 );

@@ -1,3 +1,4 @@
+drop table dw.dw_product;
 create table dw.dw_product
 (
     rowguid                   text primary key,

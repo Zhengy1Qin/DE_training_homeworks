@@ -1,10 +1,13 @@
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+import os
 
 
 def normalize_csv(ts, **kwargs):
     import csv
     source_filename = kwargs['source']
     target_filename = kwargs['target']
+    if not os.path.exists(target_filename):
+        os.makedirs(os.path.dirname(target_filename), exist_ok=True)
     header_skipped = False
     with open(source_filename, newline='') as source_file:
         with open(target_filename, "w", newline='') as target_file:

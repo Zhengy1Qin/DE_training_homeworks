@@ -1,3 +1,4 @@
+drop table dw.dw_sales_order_line_item;
 create table dw.dw_sales_order_line_item
 (
     rowguid               text primary key,

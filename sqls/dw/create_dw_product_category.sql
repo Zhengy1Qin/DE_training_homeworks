@@ -1,3 +1,4 @@
+drop table dw.dw_product_category;
 create table dw.dw_product_category
 (
     product_category_id        int primary key,
