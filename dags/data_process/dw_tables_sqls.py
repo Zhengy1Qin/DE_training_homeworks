@@ -268,10 +268,42 @@ set end_date      = '{{ ds }}',
     is_valid_flag = 'False'
 where dw.dw_sales_order.sales_order_key in (select * from changed_data);
 
-with increment_data as (select MD5(cast(sales_order_id as text) || cast(modified_date as text)) as sales_order_key,
-                               *
-                        from ods.ods_sales_order
-                        where ods_insert_date = '{{ ds }}')
+with increment_data as (select MD5(cast(sales_order_id as text) || cast(modified_date as text)) as sales_order_key
+
+                             , *
+                        from ods.ods_sales_order),
+     changed_data as (select ods.sales_order_key
+                           , ods.sales_order_id
+                           , ods.revision_number
+                           , ods.order_date
+                           , ods.due_date
+                           , ods.ship_date
+                           , ods.status
+                           , ods.online_order_flag
+                           , ods.sales_order_number
+                           , ods.purchase_order_number
+                           , ods.account_number
+                           , ods.customer_id
+                           , ods.ship_to_address_id
+                           , ods.bill_to_address_id
+                           , ods.ship_method
+                           , ods.credit_card_approval_code
+                           , ods.sub_total
+                           , ods.tax_amt
+                           , ods.freight
+                           , ods.total_due
+                           , ods.comment
+                           , ods.modified_date
+                           , '{{ ds }}'::date                                                                     as start_date
+                           , '%s'::date                                                                           as end_date
+                           , 'True'                                                                               as is_valid_flag
+                           , row_number()
+                             over (partition by ods.sales_order_key order by ods.modified_date desc)              as rank
+                      from increment_data ods
+                               left join dw.dw_sales_order dw
+                                         on ods.sales_order_key = dw.sales_order_key
+                      where dw.modified_date < ods.modified_date
+                         or dw.sales_order_key is null)
 insert
 into dw.dw_sales_order
 ( sales_order_key
@@ -299,36 +331,34 @@ into dw.dw_sales_order
 , start_date
 , end_date
 , is_valid_flag)
-select ods.sales_order_key
-     , ods.sales_order_id
-     , ods.revision_number
-     , ods.order_date
-     , ods.due_date
-     , ods.ship_date
-     , ods.status
-     , ods.online_order_flag
-     , ods.sales_order_number
-     , ods.purchase_order_number
-     , ods.account_number
-     , ods.customer_id
-     , ods.ship_to_address_id
-     , ods.bill_to_address_id
-     , ods.ship_method
-     , ods.credit_card_approval_code
-     , ods.sub_total
-     , ods.tax_amt
-     , ods.freight
-     , ods.total_due
-     , ods.comment
-     , ods.modified_date
-     , '{{ ds }}' as start_time
-     , '%s'       AS end_date
-     , 'True'     as is_valid_flag
-from increment_data ods
-         left join dw.dw_sales_order dw
-                   on ods.sales_order_key = dw.sales_order_key
-where dw.modified_date < ods.modified_date
-   or dw.sales_order_key is null
+select sales_order_key
+, sales_order_id
+, revision_number
+, order_date
+, due_date
+, ship_date
+, status
+, online_order_flag
+, sales_order_number
+, purchase_order_number
+, account_number
+, customer_id
+, ship_to_address_id
+, bill_to_address_id
+, ship_method
+, credit_card_approval_code
+, sub_total
+, tax_amt
+, freight
+, total_due
+, comment
+, modified_date
+, start_date
+, end_date
+, is_valid_flag
+from changed_data
+where rank = 1
+
 """ % default_end_time
 
 dw_address_sql = """
