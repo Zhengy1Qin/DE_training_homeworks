@@ -8,7 +8,7 @@ create table ods.ods_address
     state_province text,
     country_region text,
     postal_code    text,
-    rowguid        text primary key,
+    rowguid        text,
     modified_date  date,
     ods_insert_date    date default CURRENT_DATE
 );

@@ -38,7 +38,7 @@ from increment_data ods
          left join dw.dw_product_description dw
                    on ods.product_description_id = dw.product_description_id
 where dw.modified_date < ods.modified_date
-   or ods.product_description_id is null
+   or dw.product_description_id is null
 """ % default_end_time
 
 dw_product_model_product_description_sql = """
@@ -81,10 +81,11 @@ from increment_data ods
          left join dw.dw_product_model_product_description dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time
 
 dw_product_category_sql = """
+truncate table dw.dw_product_category;
 with increment_data as (select *
                         from ods.ods_product_category
                         where ods_insert_date = '{{ ds }}')
@@ -104,11 +105,11 @@ cast(case when ods.parent_product_category_id= 'NULL' or ods.parent_product_cate
 name,
 modified_date,
 ods_insert_date     as dw_insert_date
-from increment_data ods
-where ods.ods_insert_date not in (select dw_insert_date from dw.dw_product_model);
+from increment_data ods;
 """
 
 dw_product_model_sql = """
+truncate table dw.dw_product_model;
 with increment_data as (select *
                         from ods.ods_product_model
                         where ods_insert_date = '{{ ds }}')
@@ -127,8 +128,7 @@ ods.name,
 ods.catalog_description,
 ods.modified_date,
 ods.ods_insert_date     as dw_insert_date
-from increment_data ods
-where ods.ods_insert_date not in (select dw_insert_date from dw.dw_product_model);
+from increment_data ods;
 """
 
 dw_product_sql = """
@@ -198,7 +198,7 @@ from increment_data ods
          left join dw.dw_product dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time
 
 dw_sales_order_line_item_sql = """
@@ -249,7 +249,7 @@ from increment_data ods
          left join dw.dw_sales_order_line_item dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time
 
 dw_sales_order_sql = """
@@ -328,7 +328,7 @@ from increment_data ods
          left join dw.dw_sales_order dw
                    on ods.sales_order_key = dw.sales_order_key
 where dw.modified_date < ods.modified_date
-   or ods.sales_order_key is null
+   or dw.sales_order_key is null
 """ % default_end_time
 
 dw_address_sql = """
@@ -379,7 +379,7 @@ from increment_data ods
          left join dw.dw_address dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time
 
 dw_customer_sql = """
@@ -434,7 +434,7 @@ from increment_data ods
          left join dw.dw_customer dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time
 
 dw_customer_address_sql = """
@@ -477,5 +477,5 @@ from increment_data ods
          left join dw.dw_customer_address dw
                    on ods.rowguid = dw.rowguid
 where dw.modified_date < ods.modified_date
-   or ods.rowguid is null
+   or dw.rowguid is null
 """ % default_end_time

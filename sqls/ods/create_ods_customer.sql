@@ -14,7 +14,7 @@ create table ods.ods_customer
     phone         text,
     password_hash text,
     password_salt text,
-    rowguid       text primary key,
+    rowguid       text,
     modified_date date,
     ods_insert_date   date default CURRENT_DATE
 );

@@ -16,7 +16,7 @@ create table ods.ods_product
     discontinued_date         text,
     thumb_nail_photo          text,
     thumbnail_photo_file_name text,
-    rowguid                   text primary key,
+    rowguid                   text,
     modified_date             date,
     ods_insert_date               date default CURRENT_DATE
 );
