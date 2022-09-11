@@ -86,7 +86,8 @@ where dw.modified_date < ods.modified_date
 
 dw_product_category_sql = """
 truncate table dw.dw_product_category;
-with increment_data as (select *
+with increment_data as (select *, row_number()
+                             over (partition by product_category_id order by modified_date desc)              as rank
                         from ods.ods_product_category
                         where ods_insert_date = '{{ ds }}')
 insert
@@ -105,12 +106,15 @@ cast(case when ods.parent_product_category_id= 'NULL' or ods.parent_product_cate
 name,
 modified_date,
 ods_insert_date     as dw_insert_date
-from increment_data ods;
+from increment_data ods
+where rank = 1;
 """
 
 dw_product_model_sql = """
 truncate table dw.dw_product_model;
-with increment_data as (select *
+with increment_data as (select *,
+                             row_number()
+                             over (partition by product_model_id order by modified_date desc)              as rank
                         from ods.ods_product_model
                         where ods_insert_date = '{{ ds }}')
 insert
@@ -128,7 +132,8 @@ ods.name,
 ods.catalog_description,
 ods.modified_date,
 ods.ods_insert_date     as dw_insert_date
-from increment_data ods;
+from increment_data ods
+where rank = 1;
 """
 
 dw_product_sql = """
