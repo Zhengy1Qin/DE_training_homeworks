@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 
-from utils.load_csv_to_postgres import load_csv_to_postgres
+from data_process.load_csv_to_postgres import load_csv_to_postgres
 
 from data_process import dw_tables_sqls as dw_sqls
 
@@ -23,7 +23,7 @@ with DAG(
         catchup=False,
 ) as dag:
     dag_start = BashOperator(
-        task_id='dag_start',
+        task_id='daily_dag_start',
         bash_command='echo Load raw data to ods',
     )
 
