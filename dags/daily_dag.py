@@ -10,6 +10,7 @@ from airflow.providers.postgres.operators.postgres import PostgresOperator
 from data_process.load_csv_to_postgres import load_csv_to_postgres
 
 from data_process import dw_tables_sqls as dw_sqls
+from data_process import dm_table_sqls as dm_sqls
 
 default_args = {"owner": "airflow"}
 connection_id = 'dwh'
@@ -187,14 +188,16 @@ with DAG(
         bash_command='echo All data have been transformed from ods to dw',
     )
 
-    dm_city_sales = BashOperator(
-        task_id='dm_city_sales',
-        bash_command='echo add detail',
+    dm_city_sales = PostgresOperator(
+        task_id="dm_city_sales",
+        postgres_conn_id=connection_id,
+        sql=dm_sqls.dm_city_sales_sql,
     )
 
-    dm_product_sales = BashOperator(
-        task_id='dm_product_sales',
-        bash_command='echo add detail',
+    dm_product_sales_by_month = PostgresOperator(
+        task_id="dm_product_sales_by_month",
+        postgres_conn_id=connection_id,
+        sql=dm_sqls.dm_product_sales_by_month_sql,
     )
 
     dm_finished = BashOperator(
@@ -209,4 +212,4 @@ with DAG(
         dw_product_model_product_description,
         dw_product_category, dw_product_model, dw_product,
         dw_sales_order_line_item, dw_sales_order, dw_address,
-        dw_customer, dw_customer_address] >> dw_finished >> [dm_city_sales, dm_product_sales] >> dm_finished
+        dw_customer, dw_customer_address] >> dw_finished >> [dm_city_sales, dm_product_sales_by_month] >> dm_finished

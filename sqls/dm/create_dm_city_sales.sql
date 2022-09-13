@@ -1,11 +1,9 @@
-drop table dm.dm_city_sales;
+drop table if exists dm.dm_city_sales;
 create table dm.dm_city_sales
 (
-    city        text,
-    year        text,
-    month       text,
-    total_due   money,
-    total_cost  money,
-    total_profit money,
-    increase_due_rate float
+    city      text,
+    year      int,
+    month     int,
+    total_due money,
+    increase_due_rate  float
 );
